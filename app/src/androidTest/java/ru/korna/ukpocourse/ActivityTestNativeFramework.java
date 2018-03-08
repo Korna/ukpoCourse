@@ -79,23 +79,25 @@ public class ActivityTestNativeFramework {
 
         View v0 = activity.findViewById(R.id.button_action);
 
-        activity.runOnUiThread(v0::performClick);
 
 
         TextView textView_string = activity.findViewById(R.id.editText_string);
-        activity.runOnUiThread(() -> textView_string.setText("string"));
-        assertEquals(textView_string.getText().toString(), "");
-
         TextView textView_rule = activity.findViewById(R.id.editText_rule);
-        activity.runOnUiThread(() -> textView_rule.setText("rule"));
+        activity.runOnUiThread(() -> {
+            textView_string.setText("string");
+            textView_rule.setText("rule");
+        });
 
-        try {
-            wait(200);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
-        assertNotEquals(textView_rule.getText().toString(), "");
+
+        activity.runOnUiThread(() -> {
+            activity.runOnUiThread(v0::performClick);
+            assertEquals(textView_string.getText().toString(), "");
+            assertNotEquals(textView_rule.getText().toString(), "");
+        });
+
+
+
 
     }
 
@@ -117,9 +119,14 @@ public class ActivityTestNativeFramework {
         assertEquals(constraintLayout.getVisibility(), View.INVISIBLE);
 
         View button = activity.findViewById(R.id.button_action);
-        activity.runOnUiThread(button::performClick);
+        activity.runOnUiThread(() -> {
+            button.performClick();
+            assertEquals(constraintLayout.getVisibility(), View.VISIBLE);
 
-        assertEquals(constraintLayout.getVisibility(), View.VISIBLE);
+        });
+
+
+
     }
 
 
