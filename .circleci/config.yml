@@ -19,14 +19,14 @@ jobs:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
+          name: Run Unit Tests
+          command: ./gradlew lint test
+      - run:
           name: Run Instrumentation Tests
           command: ./gradlew connectedAndroidTest -i
       - run:
           name: Run Debug Instrumentation Tests
           command: ./gradlew connectedDevelopmentDebugAndroidTest
-      - run:
-          name: Run Unit Tests
-          command: ./gradlew lint test
       - store_artifacts:
           path: app/build/reports
           destination: reports
