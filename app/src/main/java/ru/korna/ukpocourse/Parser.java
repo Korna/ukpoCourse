@@ -17,7 +17,11 @@ public class Parser {
     }
 
     public ArrayList<Integer> findIndexes(String line, Pattern rule) {
-        ArrayList<Integer> list = new ArrayList();
+        ArrayList<Integer> list = new ArrayList<>();
+
+        if(line.equals("") || rule == null)
+            return list;
+
         Matcher matcher = rule.matcher(line);
 
         while(matcher.find()) {
@@ -29,6 +33,9 @@ public class Parser {
     }
 
     public Pattern parseRule(String line) {
-        return Pattern.compile(line);
+        if(!line.equals(""))
+            return Pattern.compile(line);
+        else
+            return null;
     }
 }
