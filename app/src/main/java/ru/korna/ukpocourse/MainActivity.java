@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button_action.setOnClickListener(this);
         editText_string.setOnClickListener(this);
         editText_rule.setOnClickListener(this);
+
     }
 
     @Override

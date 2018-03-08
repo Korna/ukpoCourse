@@ -88,6 +88,13 @@ public class ActivityTestNativeFramework {
 
         TextView textView_rule = activity.findViewById(R.id.editText_rule);
         activity.runOnUiThread(() -> textView_rule.setText("rule"));
+
+        try {
+            wait(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         assertNotEquals(textView_rule.getText().toString(), "");
 
     }
