@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 pattern = parser.parseRule(editText_rule.getText().toString());
                 line = editText_string.getText().toString();
 
+                clearInput();
+
                 ArrayList<Integer> list = parser.findIndexes(line, pattern);
                 String result = mapResult(list);
 
@@ -72,5 +74,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void showResult(String result){
         Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+    }
+
+    private void clearInput(){
+        editText_string.setText("");
     }
 }
